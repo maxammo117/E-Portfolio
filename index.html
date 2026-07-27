@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Deyton Dickson — Frontend Developer</title>
+<meta name="description" content="Frontend developer in the Southern Tier of New York. Hand-built websites for small businesses." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='10' fill='none' stroke='%23c6a45e' stroke-width='4'/></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+/* =========================================================
+   DEYTON DICKSON — PORTFOLIO
+   Palette: Mordor ink, ember fire, ring gold, parchment text
+   ========================================================= */
+:root{
+  --ink:#0b0908;
+  --ink-2:#120e0b;
+  --panel:#161009;
+  --line:rgba(198,164,94,.22);
+  --gold:#c6a45e;
+  --gold-bright:#eBD29B;
+  --text:#d9cebc;
+  --muted:#93876f;
+  --ember:#ff6a1f;
+  --ember-deep:#c81d05;
+  --display:'Cinzel','Trajan Pro',Georgia,serif;
+  --body:'EB Garamond',Palatino,'Palatino Linotype',Georgia,serif;
+}
+
+[data-theme="light"]{
+  --bg: #f5f1e8;
+  --text:#d9cebc;
+  --panel:#f5f1e8;
+  --line:rgba(198,164,94,.22);
+  --gold:#c6a45e;
+  --gold-bright:#eBD29B;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ink);
+  color:var(--text);
+  font-family:var(--body);
+  font-size:18px;
+  line-height:1.65;
+  overflow-x:hidden;
+}
+/* faint smoke vignette */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-1;
+  background:
+    radial-gradient(1200px 600px at 50% -10%, rgba(200,29,5,.10), transparent 60%),
+    radial-gradient(900px 500px at 85% 110%, rgba(198,164,94,.05), transparent 60%),
+    var(--ink);
+}
+::selection{background:var(--ember-deep);color:#fff}
+a{color:var(--gold-bright)}
+img{max-width:100%}
+
+/* ---------- nav ---------- */
+nav{
+  position:sticky;top:0;z-index:40;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 22px;
+  background:rgba(11,9,8,.82);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.monogram{font-family:var(--display);font-weight:700;color:var(--gold);
+  letter-spacing:.2em;font-size:15px;text-decoration:none}
+.nav-links{display:flex;gap:22px;list-style:none}
+.nav-links a{
+  font-family:var(--display);font-size:12px;letter-spacing:.22em;
+  text-transform:uppercase;text-decoration:none;color:var(--muted);
+  transition:color .25s;
+}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--gold-bright)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #1957f6;
+  text-decoration: none;
+}
+
+.social-link i {
+  font-size: 1.4rem;
+}
+
+
+/* ---------- hero ---------- */
+.hero{
+  min-height: 100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:60px 20px 40px;
+}
+
+/* ---------- THE EYE ---------- */
+.eye-stage{position:relative;width:min(380px,80vw);height:210px;margin-bottom:44px}
+.eye-glow{
+  position:absolute;inset:-46px;border-radius:50%;
+  background:radial-gradient(ellipse at center, rgba(255,106,31,.35), rgba(200,29,5,.14) 45%, transparent 70%);
+  filter:blur(14px);
+  animation:breathe 4.5s ease-in-out infinite;
+}
+.eye-glow.two{animation-delay:-2.2s;inset:-26px;opacity:.8}
+@keyframes breathe{
+  0%,100%{transform:scale(1);opacity:.75}
+  50%{transform:scale(1.08);opacity:1}
+}
+.eye{
+  position:absolute;inset:0;
+  border-radius:50% / 46%;
+  overflow:hidden;
+  background:
+    radial-gradient(ellipse at 50% 50%,
+      #ffe08a 0%, #ffb545 16%, #ff7a1e 34%,
+      #e33a08 55%, #7c1402 74%, #2a0500 92%, #120200 100%);
+  box-shadow:
+    0 0 42px 10px rgba(255,106,31,.42),
+    0 0 120px 30px rgba(200,29,5,.22),
+    inset 0 0 34px 12px rgba(20,2,0,.85),
+    inset 0 0 90px 20px rgba(120,15,0,.5);
+}
+/* heat shimmer streaks */
+.eye::after{
+  content:"";position:absolute;inset:-20%;
+  background:repeating-radial-gradient(ellipse at 50% 50%,
+    rgba(255,190,90,.09) 0 6px, transparent 6px 14px);
+  mix-blend-mode:screen;
+  animation:shimmer 7s linear infinite;
+}
+@keyframes shimmer{from{transform:rotate(0deg) scale(1)}50%{transform:rotate(3deg) scale(1.05)}to{transform:rotate(0deg) scale(1)}}
+.iris{
+  position:absolute;left:50%;top:50%;width:150px;height:150px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:radial-gradient(circle,
+    #ffd76b 0%, #ff9b2f 32%, #f0540f 58%, rgba(160,25,2,.55) 78%, transparent 90%);
+  filter:blur(1px);
+}
+.pupil{
+  position:absolute;left:50%;top:50%;width:26px;height:126px;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(ellipse at center,#000 62%,#1a0300 100%);
+  border-radius:50%;
+  box-shadow:0 0 22px 6px rgba(0,0,0,.9), 0 0 46px 10px rgba(120,10,0,.6);
+}
+.eye-caption{
+  font-family:var(--display);font-size:10.5px;letter-spacing:.34em;
+  text-transform:uppercase;color:var(--muted);margin-top:-26px;margin-bottom:34px;
+}
+
+.kicker{
+  font-family:var(--display);font-size:12px;letter-spacing:.34em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:18px;
+}
+h1{
+  font-family:var(--display);font-weight:700;color:var(--gold-bright);
+  font-size:clamp(34px,7vw,58px);letter-spacing:.12em;line-height:1.15;
+}
+.role{
+  font-size:clamp(18px,3vw,22px);color:var(--text);margin-top:14px;
+}
+.tagline{
+  font-style:italic;color:var(--muted);margin-top:10px;font-size:17px;
+}
+.hero-cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;justify-content:center}
+
+/* ---------- buttons ---------- */
+.btn{
+  font-family:var(--display);font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;
+  padding:14px 24px;border-radius:3px;text-decoration:none;cursor:pointer;
+  transition:transform .2s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
+  display:inline-flex;align-items:center;gap:9px;border:1px solid var(--gold);
+  background:transparent;color:var(--gold-bright);
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(198,164,94,.18)}
+.btn-solid{background:var(--gold);color:#171007;font-weight:600}
+.btn-solid:hover{background:var(--gold-bright)}
+
+/* ---------- reveal (fade in AND out) ---------- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:none}
+.reveal.d1{transition-delay:.12s}
+.reveal.d2{transition-delay:.24s}
+
+/* ---------- crossed swords divider ---------- */
+.swords{
+  position:relative;height:230px;margin:20px auto 10px;width:min(420px,90vw);
+  display:flex;align-items:center;justify-content:center;
+}
+.sword{position:absolute;width:120px;height:270px;opacity:0;
+  transition:transform 1s cubic-bezier(.2,.85,.3,1.12),opacity .5s ease;
+  will-change:transform;
+}
+.sword-l{transform:rotate(-85deg) translateY(40px)}
+.sword-r{transform:rotate(85deg) translateY(40px)}
+.swords.visible .sword{opacity:1}
+.swords.visible .sword-l{transform:rotate(-32deg)}
+.swords.visible .sword-r{transform:rotate(32deg)}
+.clash{
+  position:absolute;width:90px;height:90px;border-radius:50%;
+  background:radial-gradient(circle, rgba(255,235,180,.95), rgba(255,140,40,.5) 45%, transparent 70%);
+  opacity:0;transform:scale(.3);pointer-events:none;
+}
+.swords.visible .clash{animation:clash .55s .8s ease-out}
+@keyframes clash{
+  0%{opacity:0;transform:scale(.3)}
+  35%{opacity:.95;transform:scale(1)}
+  100%{opacity:0;transform:scale(1.7)}
+}
+
+/* ---------- sections ---------- */
+section{max-width:1020px;margin:0 auto;padding:70px 22px}
+.sec-kicker{
+  font-family:var(--display);font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:10px;
+}
+h2{
+  font-family:var(--display);font-weight:600;color:var(--gold-bright);
+  font-size:clamp(26px,4.6vw,36px);letter-spacing:.08em;margin-bottom:34px;
+}
+.rule{width:64px;height:1px;background:var(--gold);margin:18px 0 0;opacity:.6}
+
+/* ---------- project cards ---------- */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));gap:20px}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:6px;
+  padding:26px 24px 24px;display:flex;flex-direction:column;
+  transition:transform .3s ease,border-color .3s ease,box-shadow .35s ease;
+}
+.card:hover{
+  transform:translateY(-5px);border-color:rgba(198,164,94,.55);
+  box-shadow:0 14px 34px rgba(0,0,0,.5), 0 0 30px rgba(200,29,5,.10);
+}
+.card h3{font-family:var(--display);font-weight:600;color:var(--gold-bright);
+  font-size:20px;letter-spacing:.06em}
+.status{
+  display:inline-block;margin:10px 0 0;font-family:var(--display);
+  font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;
+  border:1px solid var(--line);color:var(--muted);padding:4px 9px;border-radius:2px;
+}
+.status.live{color:#9fbb7f;border-color:rgba(159,187,127,.4)}
+.status.dev{color:var(--ember);border-color:rgba(255,106,31,.4)}
+.card p{color:var(--text);font-size:16.5px;margin:14px 0 18px;flex:1}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.tag{
+  font-family:var(--display);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);border:1px solid var(--line);padding:4px 8px;border-radius:2px;
+}
+.card-links{display:flex;gap:10px;flex-wrap:wrap}
+.btn-sm{padding:10px 16px;font-size:11px}
+
+/* ---------- about ---------- */
+.about-grid{display:grid;grid-template-columns:1fr;gap:20px;max-width:720px}
+.about-grid p{font-size:18.5px}
+.about-grid em{color:var(--gold-bright)}
+
+/* ---------- contact ---------- */
+.contact{text-align:center;padding-bottom:90px}
+.contact .rule{margin:18px auto 0}
+.contact-note{color:var(--muted);font-style:italic;margin:16px 0 30px}
+.contact-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+footer{
+  border-top:1px solid var(--line);padding:26px 22px 40px;text-align:center;
+  color:var(--muted);font-size:14px;
+}
+footer .monogram{display:block;margin-bottom:10px}
+
+@media (max-width:560px){
+  .nav-links{gap:14px}
+  .nav-links a{font-size:10.5px;letter-spacing:.16em}
+  section{padding:54px 18px}
+}
+@media (prefers-reduced-motion: reduce){
+  .reveal{transition:none;opacity:1;transform:none}
+  .eye-glow,.eye::after{animation:none}
+  .sword{transition:none;opacity:1}
+  .sword-l{transform:rotate(-32deg)}
+  .sword-r{transform:rotate(32deg)}
+  .swords .clash{animation:none}
+  html{scroll-behavior:auto}
+}
+.portrait-block {
+  text-align: center;
+  padding:0rem 1rem 4rem;
+}
+
+.portrait {
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+}
+
+.portrait-caption {
+  margin-top:1rem;
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="monogram" href="#" aria-label="Deyton Dickson — back to top">D·D</a>
+
+  <ul class="nav-links">
+    <li><a href="#about">The Tale</a></li>
+        <li><a href="#contact">Send Word</a></li>
+    <li><a href="#work">The Works</a></li>
+    <li>
+      <a class="social-link" href="https://www.linkedin.com/in/YOUR-SLUG"
+         target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="top">
+  <div class="eye-stage" aria-hidden="true">
+    <div class="eye-glow"></div>
+    <div class="eye-glow two"></div>
+    <div class="eye">
+      <div class="iris" id="iris"></div>
+      <div class="pupil" id="pupil"></div>
+    </div>
+  </div>
+  <div class="eye-caption">it sees your cursor</div>
+
+  <p class="kicker">Southern Tier · New York</p>
+  <h1>DEYTON DICKSON</h1>
+  <p class="role">Frontend Developer — hand-built websites for small businesses</p>
+  <p class="tagline">“One does not simply launch without a website.”</p>
+
+  <div class="hero-cta">
+    <a class="btn btn-solid" href="#works">View the Works</a>
+    <a class="btn" id="heroEmail" href="#contact">Send Word</a>
+  </div>
+</header>
+
+<!-- ================= SWORDS DIVIDER ================= -->
+<div class="swords reveal" aria-hidden="true">
+  <div class="clash"></div>
+
+  <div class="sword sword-l">
+    <!-- Anduril-style: long fullered blade, marked steel, guard tips kicked
+         toward the blade, two-hand grip, flattened disc pommel + finial -->
+    <svg viewBox="-60 -172 120 306" width="120" height="270" role="img" aria-hidden="true">
+      <defs>
+        <linearGradient id="steelL" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#f2f4f8"/><stop offset=".45" stop-color="#aeb6c2"/>
+          <stop offset=".55" stop-color="#8b93a1"/><stop offset="1" stop-color="#e6eaf1"/>
+        </linearGradient>
+        <linearGradient id="fitL" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#dde1e9"/><stop offset="1" stop-color="#7d8595"/>
+        </linearGradient>
+        <linearGradient id="gripL" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#5a3823"/><stop offset=".5" stop-color="#38220f"/>
+          <stop offset="1" stop-color="#5a3823"/>
+        </linearGradient>
+      </defs>
+      <!-- blade -->
+      <path d="M0,-168 C3,-159 6.5,-150 8,-138 L9.5,36 L-9.5,36 L-8,-138 C-6.5,-150 -3,-159 0,-168 Z" fill="url(#steelL)"/>
+      <rect x="-1.7" y="-136" width="3.4" height="164" rx="1.7" fill="rgba(74,82,96,.55)"/>
+      <path d="M-8,-138 L-9.5,36 L-7.6,36 L-6.4,-138 Z" fill="rgba(255,255,255,.5)"/>
+      <!-- etched marks along the fuller -->
+      <g fill="rgba(60,66,78,.6)">
+        <rect x="-4.6" y="-118" width="1.6" height="7"/><rect x="3" y="-113" width="1.6" height="7"/>
+        <rect x="-4.6" y="-99" width="1.6" height="7"/><rect x="3" y="-94" width="1.6" height="7"/>
+        <rect x="-4.6" y="-80" width="1.6" height="7"/><rect x="3" y="-75" width="1.6" height="7"/>
+      </g>
+      <!-- crossguard, tips angled toward the blade -->
+      <path d="M-3,32 L-31,31 L-44,22 L-46,34 L-32,44 L32,44 L46,34 L44,22 L31,31 L3,32 Z"
+            fill="url(#fitL)" stroke="#5c6472" stroke-width="1"/>
+      <!-- two-hand grip with steel collars -->
+      <rect x="-5.2" y="44" width="10.4" height="66" rx="4" fill="url(#gripL)"/>
+      <g stroke="rgba(18,10,4,.65)" stroke-width="1.4">
+        <line x1="-5" y1="54" x2="5" y2="58"/><line x1="-5" y1="64" x2="5" y2="68"/>
+        <line x1="-5" y1="74" x2="5" y2="78"/><line x1="-5" y1="84" x2="5" y2="88"/>
+        <line x1="-5" y1="94" x2="5" y2="98"/>
+      </g>
+      <rect x="-6.2" y="44" width="12.4" height="5" rx="2" fill="url(#fitL)"/>
+      <rect x="-6.2" y="105" width="12.4" height="5" rx="2" fill="url(#fitL)"/>
+      <!-- flattened disc pommel + finial -->
+      <ellipse cx="0" cy="119" rx="11.5" ry="8.5" fill="url(#fitL)" stroke="#5c6472" stroke-width="1"/>
+      <ellipse cx="0" cy="119" rx="5.5" ry="4" fill="#8b93a1"/>
+      <circle cx="0" cy="129.5" r="2.6" fill="url(#fitL)"/>
+    </svg>
+  </div>
+
+  <div class="sword sword-r">
+    <!-- Glamdring-style: slim ridged blade, guard swept toward the blade
+         like wings, wire-wrapped grip, scent-stopper pommel -->
+    <svg viewBox="-60 -172 120 306" width="120" height="270" role="img" aria-hidden="true">
+      <defs>
+        <linearGradient id="steelR" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#f3f6fb"/><stop offset=".45" stop-color="#b3bfd2"/>
+          <stop offset=".55" stop-color="#8791a3"/><stop offset="1" stop-color="#e9edf5"/>
+        </linearGradient>
+        <linearGradient id="fitR" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#e2e7f0"/><stop offset="1" stop-color="#79839a"/>
+        </linearGradient>
+      </defs>
+      <!-- slim blade with center ridge -->
+      <path d="M0,-168 C2.4,-158 4.6,-148 5.6,-134 L7,30 L-7,30 L-5.6,-134 C-4.6,-148 -2.4,-158 0,-168 Z" fill="url(#steelR)"/>
+      <path d="M0,-164 L1.1,30 L-1.1,30 Z" fill="rgba(255,255,255,.55)"/>
+      <path d="M-5.6,-134 L-7,30 L-5.2,30 L-4.3,-134 Z" fill="rgba(70,78,92,.45)"/>
+      <!-- winged guard sweeping toward the blade -->
+      <path d="M0,38 C-13,37 -25,33 -33,24 C-39,17 -41,7 -38,-3 L-33.5,-1 C-35,7 -32,15 -25,20 C-17,25.5 -9,27.5 0,28 C9,27.5 17,25.5 25,20 C32,15 35,7 33.5,-1 L38,-3 C41,7 39,17 33,24 C25,33 13,37 0,38 Z"
+            fill="url(#fitR)" stroke="#59637a" stroke-width="1"/>
+      <rect x="-4.5" y="28" width="9" height="13" rx="2" fill="url(#fitR)"/>
+      <!-- wire-wrapped grip -->
+      <rect x="-4.6" y="40" width="9.2" height="52" rx="4" fill="#232833"/>
+      <g stroke="rgba(190,200,220,.5)" stroke-width="1">
+        <line x1="-4.4" y1="47" x2="4.4" y2="49"/><line x1="-4.4" y1="55" x2="4.4" y2="57"/>
+        <line x1="-4.4" y1="63" x2="4.4" y2="65"/><line x1="-4.4" y1="71" x2="4.4" y2="73"/>
+        <line x1="-4.4" y1="79" x2="4.4" y2="81"/><line x1="-4.4" y1="87" x2="4.4" y2="89"/>
+      </g>
+      <!-- scent-stopper pommel -->
+      <path d="M0,92 C7,95 9.5,101 8.5,109 C7.5,117 4,123 0,126 C-4,123 -7.5,117 -8.5,109 C-9.5,101 -7,95 0,92 Z"
+            fill="url(#fitR)" stroke="#59637a" stroke-width="1"/>
+      <circle cx="0" cy="128.5" r="2.2" fill="url(#fitR)"/>
+    </svg>
+  </div>
+</div>
+
+<!-- ================= WORKS ================= -->
+<section id="works">
+  <p class="sec-kicker reveal">Forged by hand — HTML, CSS &amp; JavaScript</p>
+  <h2 class="reveal">The Works</h2>
+
+  <div class="cards">
+    <article class="card reveal">
+      <h3>Dickson Trucking</h3>
+      <span class="status live">Live client site</span>
+      <p>Website for a working heavy-haul and dump-trailer fleet. Black-and-red branding, service pages, and quote-request forms. Built in pure HTML/CSS and deployed on GitHub Pages under a custom domain.</p>
+      <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">GitHub Pages</span></div>
+      <div class="card-links">
+        <a class="btn btn-sm btn-solid" href="https://dtrkg.com" target="_blank" rel="noopener">Visit Site</a>
+        <!-- TODO: paste the repo URL below -->
+        <a class="btn btn-sm" href="https://github.com/maxammo117/DT-Website" target="_blank" rel="noopener">Code</a>
+      </div>
+    </article>
+    
+    <article class="card reveal d1">
+      <h3>The Reference Room</h3>
+      <span class="status">Demo build</span>
+      <p>A luxury watch marketplace with a working cart, hand-drawn SVG watches whose hands sweep to the real time, brand filtering, and a slide-out cart with quantity control. Built around the reference numbers I collect by.</p>
+      <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+      <div class="card-links">
+        <!-- Relative link: works when both files sit in the same GitHub Pages repo -->
+        <a class="btn btn-sm btn-solid" href="https://maxammo117.github.io/The-Reference-Room/">Live Demo</a>
+        <!-- TODO: paste the repo URL below -->
+        <a class="btn btn-sm" href="https://github.com/maxammo117/The-Reference-Room/blob/main/the-reference-room.html" target="_blank" rel="noopener">Code</a>
+      </div>
+    </article>
+
+    <article class="card reveal d2">
+      <h3>HaulBill</h3>
+      <span class="status dev">In development</span>
+      <p>AI ticket-to-invoice tool for small dump fleets: photograph a paper scale ticket, review the extracted data, and send a clean invoice the same day. Born from real paperwork at a real fleet.</p>
+      <div class="tags"><span class="tag">React</span><span class="tag">Python</span><span class="tag">Product</span></div>
+      <div class="card-links">
+        <!-- TODO: paste the repo URL when it's public -->
+        <a class="btn btn-sm" href="https://github.com/maxammo117" target="_blank" rel="noopener">Follow the Build</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <p class="sec-kicker reveal">The Tale</p>
+  <h2 class="reveal">Diesel, Dirt &amp; Code</h2>
+  <div class="about-grid reveal d1">
+    <p>I turn wrenches and run operations at my family's trucking company in the Southern Tier of New York, heavy haul, dump trailers, real deadlines. That's where I learned how small businesses actually work: <em>the phone rings, the job gets done, the invoice goes out.</em></p>
+    <p>Now I build websites the same way, by hand, in plain HTML, CSS, and JavaScript, for local businesses that are great at their trade and invisible online. Business degree, equipment-operator's patience, and a builder's stubbornness.</p>
+    <p>If your outfit doesn't show up on Google, that's the problem I fix.</p>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact" class="contact">
+  <p class="sec-kicker reveal">Send Word</p>
+  <h2 class="reveal">Summon a Developer</h2>
+  <p class="contact-note reveal">The eagles are busy — email is faster.</p>
+  <div class="contact-cta reveal d1">
+    <a class="btn btn-solid" id="emailBtn" href="#">Email Me</a>
+    <button class="btn" id="copyBtn" type="button">Copy Email</button>
+    <a class="btn" href="https://github.com/maxammo117" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</section>
+<section class="portrait-block">
+  <img src="deyton.png"
+       alt="Deyton Dickson"
+       class="portrait"
+       width="200" height="200">
+  <p class="portrait-caption">Deyton Dickson · Southern Tier, NY</p>
+</section>
+
+
+<footer class="site-footer">
+  <span class="monogram">D · D</span>
+  <p>Forged in the Southern Tier · &copy; <span id="year"></span> Deyton Dickson</p>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+
+<script>
+/* =====================================================
+   ONE LINE TO EDIT: your real email address goes here.
+   Both email buttons read from this constant.
+   ===================================================== */
+const EMAIL = "Deytondickson1@gmail.com"; // TODO ← change me
+
+/* ---- email buttons ---- */
+const emailBtn = document.getElementById("emailBtn");
+const heroEmail = document.getElementById("heroEmail");
+emailBtn.href = "mailto:" + EMAIL + "?subject=Website%20inquiry";
+heroEmail.href = "mailto:" + EMAIL + "?subject=Website%20inquiry";
+
+const copyBtn = document.getElementById("copyBtn");
+copyBtn.addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText(EMAIL);
+    copyBtn.textContent = "Copied ✓";
+  } catch {
+    copyBtn.textContent = EMAIL; // fallback: show it so it can be copied by hand
+  }
+  setTimeout(() => (copyBtn.textContent = "Copy Email"), 1800);
+});
+
+/* ---- the Eye of Sauron: pupil tracks the pointer ---- */
+const eye = document.querySelector(".eye");
+const pupil = document.getElementById("pupil");
+const iris = document.getElementById("iris");
+const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const MAX_X = 56, MAX_Y = 24;      // how far the pupil may travel
+let tx = 0, ty = 0;                // target offset
+let px = 0, py = 0;                // current offset (eased)
+let lastInput = 0;
+
+window.addEventListener("pointermove", (e) => {
+  const r = eye.getBoundingClientRect();
+  const cx = r.left + r.width / 2;
+  const cy = r.top + r.height / 2;
+  const dx = e.clientX - cx;
+  const dy = e.clientY - cy;
+  const dist = Math.hypot(dx, dy) || 1;
+  const reach = Math.min(1, dist / 260); // nearer cursor = subtler gaze
+  tx = (dx / dist) * MAX_X * reach;
+  ty = (dy / dist) * MAX_Y * reach;
+  lastInput = performance.now();
+}, { passive: true });
+
+function animate(t) {
+  // no pointer lately? the Eye wanders, searching.
+  if (!reduced && t - lastInput > 2600) {
+    tx = Math.sin(t / 1500) * MAX_X * 0.7;
+    ty = Math.sin(t / 2400) * MAX_Y * 0.45;
+  }
+  px += (tx - px) * 0.085;
+  py += (ty - py) * 0.085;
+  pupil.style.transform =
+    "translate(calc(-50% + " + px + "px), calc(-50% + " + py + "px))";
+  iris.style.transform =
+    "translate(calc(-50% + " + px * 0.35 + "px), calc(-50% + " + py * 0.35 + "px))";
+  requestAnimationFrame(animate);
+}
+requestAnimationFrame(animate);
+
+/* ---- scroll reveals: fade in on entry, fade out on exit ---- */
+const io = new IntersectionObserver(
+  (entries) =>
+    entries.forEach((en) =>
+      en.target.classList.toggle("visible", en.isIntersecting)
+    ),
+  { threshold: 0.16 }
+);
+document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+</script>
+</body>
+</html>
