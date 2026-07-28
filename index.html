@@ -8,8 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='10' fill='none' stroke='%23c6a45e' stroke-width='4'/></svg>" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
-<link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
 /* =========================================================
    DEYTON DICKSON — PORTFOLIO
@@ -17,7 +16,6 @@
    ========================================================= */
 :root{
   --ink:#0b0908;
-  --ink-2:#120e0b;
   --panel:#161009;
   --line:rgba(198,164,94,.22);
   --gold:#c6a45e;
@@ -26,21 +24,14 @@
   --muted:#93876f;
   --ember:#ff6a1f;
   --ember-deep:#c81d05;
+  --parchment:#c5c2b0;
+  --parchment-deep:#93876f;
   --display:'Cinzel','Trajan Pro',Georgia,serif;
   --body:'EB Garamond',Palatino,'Palatino Linotype',Georgia,serif;
 }
 
-[data-theme="light"]{
-  --bg: #f5f1e8;
-  --text:#d9cebc;
-  --panel:#f5f1e8;
-  --line:rgba(198,164,94,.22);
-  --gold:#c6a45e;
-  --gold-bright:#eBD29B;
-}
-
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
 body{
   background:var(--ink);
   color:var(--text);
@@ -49,6 +40,8 @@ body{
   line-height:1.65;
   overflow-x:hidden;
 }
+body.is-locked{overflow:hidden}
+
 /* faint smoke vignette */
 body::before{
   content:"";position:fixed;inset:0;z-index:-1;
@@ -71,7 +64,7 @@ nav{
 }
 .monogram{font-family:var(--display);font-weight:700;color:var(--gold);
   letter-spacing:.2em;font-size:15px;text-decoration:none}
-.nav-links{display:flex;gap:22px;list-style:none}
+.nav-links{display:flex;gap:22px;list-style:none;align-items:center}
 .nav-links a{
   font-family:var(--display);font-size:12px;letter-spacing:.22em;
   text-transform:uppercase;text-decoration:none;color:var(--muted);
@@ -79,22 +72,18 @@ nav{
 }
 .nav-links a:hover,.nav-links a:focus-visible{color:var(--gold-bright)}
 a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
-.social-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #1957f6;
-  text-decoration: none;
-}
 
-.social-link i {
-  font-size: 1.4rem;
+.social-link{
+  display:inline-flex;align-items:center;
+  color:var(--muted);text-decoration:none;
+  transition:color .25s;
 }
-
+.social-link:hover,.social-link:focus-visible{color:var(--gold-bright)}
+.social-link i{font-size:16px}
 
 /* ---------- hero ---------- */
 .hero{
-  min-height: 100vh;
+  min-height:100vh;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   text-align:center;padding:60px 20px 40px;
 }
@@ -126,7 +115,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
     inset 0 0 34px 12px rgba(20,2,0,.85),
     inset 0 0 90px 20px rgba(120,15,0,.5);
 }
-/* heat shimmer streaks */
 .eye::after{
   content:"";position:absolute;inset:-20%;
   background:repeating-radial-gradient(ellipse at 50% 50%,
@@ -163,12 +151,8 @@ h1{
   font-family:var(--display);font-weight:700;color:var(--gold-bright);
   font-size:clamp(34px,7vw,58px);letter-spacing:.12em;line-height:1.15;
 }
-.role{
-  font-size:clamp(18px,3vw,22px);color:var(--text);margin-top:14px;
-}
-.tagline{
-  font-style:italic;color:var(--muted);margin-top:10px;font-size:17px;
-}
+.role{font-size:clamp(18px,3vw,22px);color:var(--text);margin-top:14px}
+.tagline{font-style:italic;color:var(--muted);margin-top:10px;font-size:17px}
 .hero-cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;justify-content:center}
 
 /* ---------- buttons ---------- */
@@ -176,14 +160,16 @@ h1{
   font-family:var(--display);font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;
   padding:14px 24px;border-radius:3px;text-decoration:none;cursor:pointer;
   transition:transform .2s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
-  display:inline-flex;align-items:center;gap:9px;border:1px solid var(--gold);
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  border:1px solid var(--gold);
   background:transparent;color:var(--gold-bright);
 }
 .btn:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(198,164,94,.18)}
 .btn-solid{background:var(--gold);color:#171007;font-weight:600}
 .btn-solid:hover{background:var(--gold-bright)}
+.btn-sm{padding:10px 16px;font-size:11px}
 
-/* ---------- reveal (fade in AND out) ---------- */
+/* ---------- reveal ---------- */
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
 .reveal.visible{opacity:1;transform:none}
 .reveal.d1{transition-delay:.12s}
@@ -225,7 +211,6 @@ h2{
   font-family:var(--display);font-weight:600;color:var(--gold-bright);
   font-size:clamp(26px,4.6vw,36px);letter-spacing:.08em;margin-bottom:34px;
 }
-.rule{width:64px;height:1px;background:var(--gold);margin:18px 0 0;opacity:.6}
 
 /* ---------- project cards ---------- */
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));gap:20px}
@@ -254,7 +239,6 @@ h2{
   color:var(--gold);border:1px solid var(--line);padding:4px 8px;border-radius:2px;
 }
 .card-links{display:flex;gap:10px;flex-wrap:wrap}
-.btn-sm{padding:10px 16px;font-size:11px}
 
 /* ---------- about ---------- */
 .about-grid{display:grid;grid-template-columns:1fr;gap:20px;max-width:720px}
@@ -263,9 +247,17 @@ h2{
 
 /* ---------- contact ---------- */
 .contact{text-align:center;padding-bottom:90px}
-.contact .rule{margin:18px auto 0}
 .contact-note{color:var(--muted);font-style:italic;margin:16px 0 30px}
 .contact-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* ---------- portrait ---------- */
+.portrait-block{text-align:center;padding:0 1rem 4rem}
+.portrait{
+  width:min(400px,80vw);height:min(400px,80vw);
+  border-radius:50%;object-fit:cover;display:block;margin:0 auto;
+  border:1px solid var(--line);
+}
+.portrait-caption{margin-top:1rem;font-style:italic;color:var(--muted)}
 
 footer{
   border-top:1px solid var(--line);padding:26px 22px 40px;text-align:center;
@@ -273,11 +265,163 @@ footer{
 }
 footer .monogram{display:block;margin-bottom:10px}
 
+/* =========================================================
+   MODAL — halves converge from each side
+   ========================================================= */
+.modal-backdrop{
+  position:fixed;inset:0;z-index:90;
+  background:rgba(6,4,3,.74);
+  backdrop-filter:blur(3px);
+  opacity:0;visibility:hidden;
+  transition:opacity .45s ease, visibility 0s linear .45s;
+}
+.modal-backdrop.is-open{
+  opacity:1;visibility:visible;
+  transition:opacity .45s ease;
+}
+
+.modal{
+  position:fixed;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  z-index:100;
+  width:92%;max-width:1000px;max-height:86vh;
+  border-radius:20px;
+  box-shadow:0 20px 80px rgba(0,0,0,.55);
+  overflow:hidden;
+  display:flex;
+  visibility:hidden;pointer-events:none;
+  transition:visibility 0s linear .6s;
+}
+.modal.is-open{
+  visibility:visible;pointer-events:auto;
+  transition:visibility 0s;
+}
+
+.modal__half{
+  flex:1 1 50%;min-width:0;position:relative;
+  padding:clamp(26px,3.4vw,44px);
+  overflow-y:auto;
+  opacity:0;
+  transition:transform .6s cubic-bezier(.22,.61,.36,1), opacity .45s ease;
+}
+.modal__about  {transform:translateX(-100%)}
+.modal__contact{transform:translateX(100%)}
+.modal.is-open .modal__half{transform:translateX(0);opacity:1}
+
+.modal__about{
+  background:var(--parchment);color:#161009;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.modal__contact{background:var(--parchment-deep);color:#161009}
+
+.modal__title{font-family:var(--display);font-size:clamp(20px,2.3vw,26px);line-height:1.25}
+.modal__sub-title{font-size:16px;font-weight:400;font-style:italic;margin:8px 0 20px}
+.modal__para{margin:0 0 18px;line-height:1.65;font-size:16.5px}
+
+/* close */
+.modal__exit{
+  position:absolute;top:14px;right:18px;z-index:110;
+  background:none;border:none;cursor:pointer;
+  color:#f9f6f3;font-size:24px;line-height:1;padding:8px;
+  opacity:.6;transition:opacity .25s ease, transform .25s ease;
+}
+.modal__exit:hover{opacity:1;transform:scale(1.12)}
+
+/* language strip */
+.modal__languages{
+  display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-end;
+  gap:24px;margin-top:22px;
+}
+.modal__language{
+  position:relative;flex:0 0 auto;
+  display:flex;flex-direction:column;align-items:center;
+  padding-bottom:22px;
+  transition:transform .3s ease, filter .3s ease;
+}
+.modal__language:hover{transform:translateY(-3px);filter:brightness(.85)}
+.modal__language--img{width:42px;height:42px;object-fit:contain;display:block}
+.language__name{
+  position:absolute;bottom:0;left:50%;
+  transform:translateX(-50%) scale(0);
+  transform-origin:center bottom;
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  white-space:nowrap;
+  transition:transform .3s ease;
+}
+.modal__language:hover .language__name{transform:translateX(-50%) scale(1)}
+
+/* form */
+.form__item{margin-bottom:18px;text-align:left}
+.form__item label{
+  display:block;margin-bottom:6px;
+  font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+}
+.modal input,
+.modal textarea{
+  width:100%;
+  background:rgba(255,255,255,.14);
+  color:#242424;
+  font-family:var(--body);font-size:16px;
+  outline:none;
+  border:none;border-bottom:2px solid #3d352e;
+  height:46px;padding:0 10px;
+  transition:border-color .3s ease, background .3s ease;
+}
+.modal textarea{resize:vertical;height:96px;padding:10px}
+.modal input:hover,.modal textarea:hover{background:rgba(255,255,255,.22)}
+.modal input:focus,.modal textarea:focus{border-color:var(--gold-bright)}
+
+/* overlays */
+.modal__overlay{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:14px;padding:28px;text-align:center;
+  opacity:0;visibility:hidden;
+  transition:opacity .35s ease, visibility 0s linear .35s;
+}
+.modal__overlay.is-active{opacity:1;visibility:visible;transition:opacity .35s ease}
+.modal__overlay--load{background:rgba(20,15,10,.94);color:var(--gold);font-size:54px}
+.modal__overlay--success{
+  background:#2b2116;color:var(--gold-bright);
+  font-family:var(--display);font-size:clamp(17px,2vw,22px);line-height:1.5;
+}
+
+@media (max-width:760px){
+  .modal{flex-direction:column;width:94%}
+  .modal__half{width:100%}
+}
+
+/* ---------- eagle takeoff ---------- */
+.eagle-btn{position:relative;overflow:visible;width:100%;max-width:240px}
+.eagle-btn__label{transition:opacity .18s ease}
+.eagle-btn.is-flying .eagle-btn__label{opacity:0}
+.eagle-btn__bird{
+  position:absolute;left:50%;top:50%;
+  width:46px;height:28px;opacity:0;pointer-events:none;
+  fill:#171007;
+  transform:translate(-50%,-50%) scale(.4);
+}
+.eagle-btn.is-flying .eagle-btn__bird{animation:takeoff 1s ease-in forwards}
+@keyframes takeoff{
+  0%  {transform:translate(-50%,-50%) scale(.4);opacity:0}
+  18% {transform:translate(-50%,-50%) scale(1);opacity:1}
+  100%{transform:translate(150px,-130px) scale(.45);opacity:0}
+}
+.eagle__wing{transform-box:view-box;transform-origin:50px 32px}
+.eagle-btn.is-flying .eagle__wing--l{animation:flapL .26s ease-in-out infinite}
+.eagle-btn.is-flying .eagle__wing--r{animation:flapR .26s ease-in-out infinite}
+@keyframes flapL{0%,100%{transform:rotate(-18deg)}50%{transform:rotate(14deg)}}
+@keyframes flapR{0%,100%{transform:rotate(18deg)}50%{transform:rotate(-14deg)}}
+
+.fa-spinner{animation:spinner 1s linear infinite}
+@keyframes spinner{to{transform:rotate(360deg)}}
+
 @media (max-width:560px){
   .nav-links{gap:14px}
   .nav-links a{font-size:10.5px;letter-spacing:.16em}
   section{padding:54px 18px}
 }
+
 @media (prefers-reduced-motion: reduce){
   .reveal{transition:none;opacity:1;transform:none}
   .eye-glow,.eye::after{animation:none}
@@ -286,39 +430,28 @@ footer .monogram{display:block;margin-bottom:10px}
   .sword-r{transform:rotate(32deg)}
   .swords .clash{animation:none}
   html{scroll-behavior:auto}
-}
-.portrait-block {
-  text-align: center;
-  padding:0rem 1rem 4rem;
-}
-
-.portrait {
-  width: 400px;
-  height: 400px;
-  border-radius: 50%;
-  object-fit: cover;
-  display: block;
-  margin: 0 auto;
-}
-
-.portrait-caption {
-  margin-top:1rem;
-  font-style: italic;
+  .modal__half{transition:opacity .2s ease}
+  .modal__about,.modal__contact{transform:none}
+  .eagle-btn.is-flying .eagle-btn__bird,
+  .eagle-btn.is-flying .eagle__wing--l,
+  .eagle-btn.is-flying .eagle__wing--r{animation:none}
+  .eagle-btn.is-flying .eagle-btn__label{opacity:1}
+  .fa-spinner{animation:none}
 }
 </style>
 </head>
 <body>
 
 <nav>
-  <a class="monogram" href="#" aria-label="Deyton Dickson — back to top">D·D</a>
+  <a class="monogram" href="#top" aria-label="Deyton Dickson — back to top">D·D</a>
 
   <ul class="nav-links">
-    <li><a href="#about">The Tale</a></li>
-        <li><a href="#contact">Send Word</a></li>
     <li><a href="#work">The Works</a></li>
+    <li><a href="#about">The Tale</a></li>
+    <li><a href="#contact">Send Word</a></li>
     <li>
       <a class="social-link" href="https://www.linkedin.com/in/deyton-dickson-1788b2343"
-         target="_blank" rel="noopener noreferrer">
+         target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
         <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
       </a>
     </li>
@@ -344,7 +477,7 @@ footer .monogram{display:block;margin-bottom:10px}
 
   <div class="hero-cta">
     <a class="btn btn-solid" href="#work">View the Works</a>
-    <a class="btn" id="heroEmail" href="#contact">Send Word</a>
+    <button class="btn" type="button" data-modal-open>Send Word</button>
   </div>
 </header>
 
@@ -353,8 +486,6 @@ footer .monogram{display:block;margin-bottom:10px}
   <div class="clash"></div>
 
   <div class="sword sword-l">
-    <!-- Anduril-style: long fullered blade, marked steel, guard tips kicked
-         toward the blade, two-hand grip, flattened disc pommel + finial -->
     <svg viewBox="-60 -172 120 306" width="120" height="270" role="img" aria-hidden="true">
       <defs>
         <linearGradient id="steelL" x1="0" y1="0" x2="1" y2="0">
@@ -369,20 +500,16 @@ footer .monogram{display:block;margin-bottom:10px}
           <stop offset="1" stop-color="#5a3823"/>
         </linearGradient>
       </defs>
-      <!-- blade -->
       <path d="M0,-168 C3,-159 6.5,-150 8,-138 L9.5,36 L-9.5,36 L-8,-138 C-6.5,-150 -3,-159 0,-168 Z" fill="url(#steelL)"/>
       <rect x="-1.7" y="-136" width="3.4" height="164" rx="1.7" fill="rgba(74,82,96,.55)"/>
       <path d="M-8,-138 L-9.5,36 L-7.6,36 L-6.4,-138 Z" fill="rgba(255,255,255,.5)"/>
-      <!-- etched marks along the fuller -->
       <g fill="rgba(60,66,78,.6)">
         <rect x="-4.6" y="-118" width="1.6" height="7"/><rect x="3" y="-113" width="1.6" height="7"/>
         <rect x="-4.6" y="-99" width="1.6" height="7"/><rect x="3" y="-94" width="1.6" height="7"/>
         <rect x="-4.6" y="-80" width="1.6" height="7"/><rect x="3" y="-75" width="1.6" height="7"/>
       </g>
-      <!-- crossguard, tips angled toward the blade -->
       <path d="M-3,32 L-31,31 L-44,22 L-46,34 L-32,44 L32,44 L46,34 L44,22 L31,31 L3,32 Z"
             fill="url(#fitL)" stroke="#5c6472" stroke-width="1"/>
-      <!-- two-hand grip with steel collars -->
       <rect x="-5.2" y="44" width="10.4" height="66" rx="4" fill="url(#gripL)"/>
       <g stroke="rgba(18,10,4,.65)" stroke-width="1.4">
         <line x1="-5" y1="54" x2="5" y2="58"/><line x1="-5" y1="64" x2="5" y2="68"/>
@@ -391,7 +518,6 @@ footer .monogram{display:block;margin-bottom:10px}
       </g>
       <rect x="-6.2" y="44" width="12.4" height="5" rx="2" fill="url(#fitL)"/>
       <rect x="-6.2" y="105" width="12.4" height="5" rx="2" fill="url(#fitL)"/>
-      <!-- flattened disc pommel + finial -->
       <ellipse cx="0" cy="119" rx="11.5" ry="8.5" fill="url(#fitL)" stroke="#5c6472" stroke-width="1"/>
       <ellipse cx="0" cy="119" rx="5.5" ry="4" fill="#8b93a1"/>
       <circle cx="0" cy="129.5" r="2.6" fill="url(#fitL)"/>
@@ -399,8 +525,6 @@ footer .monogram{display:block;margin-bottom:10px}
   </div>
 
   <div class="sword sword-r">
-    <!-- Glamdring-style: slim ridged blade, guard swept toward the blade
-         like wings, wire-wrapped grip, scent-stopper pommel -->
     <svg viewBox="-60 -172 120 306" width="120" height="270" role="img" aria-hidden="true">
       <defs>
         <linearGradient id="steelR" x1="0" y1="0" x2="1" y2="0">
@@ -411,22 +535,18 @@ footer .monogram{display:block;margin-bottom:10px}
           <stop offset="0" stop-color="#e2e7f0"/><stop offset="1" stop-color="#79839a"/>
         </linearGradient>
       </defs>
-      <!-- slim blade with center ridge -->
       <path d="M0,-168 C2.4,-158 4.6,-148 5.6,-134 L7,30 L-7,30 L-5.6,-134 C-4.6,-148 -2.4,-158 0,-168 Z" fill="url(#steelR)"/>
       <path d="M0,-164 L1.1,30 L-1.1,30 Z" fill="rgba(255,255,255,.55)"/>
       <path d="M-5.6,-134 L-7,30 L-5.2,30 L-4.3,-134 Z" fill="rgba(70,78,92,.45)"/>
-      <!-- winged guard sweeping toward the blade -->
       <path d="M0,38 C-13,37 -25,33 -33,24 C-39,17 -41,7 -38,-3 L-33.5,-1 C-35,7 -32,15 -25,20 C-17,25.5 -9,27.5 0,28 C9,27.5 17,25.5 25,20 C32,15 35,7 33.5,-1 L38,-3 C41,7 39,17 33,24 C25,33 13,37 0,38 Z"
             fill="url(#fitR)" stroke="#59637a" stroke-width="1"/>
       <rect x="-4.5" y="28" width="9" height="13" rx="2" fill="url(#fitR)"/>
-      <!-- wire-wrapped grip -->
       <rect x="-4.6" y="40" width="9.2" height="52" rx="4" fill="#232833"/>
       <g stroke="rgba(190,200,220,.5)" stroke-width="1">
         <line x1="-4.4" y1="47" x2="4.4" y2="49"/><line x1="-4.4" y1="55" x2="4.4" y2="57"/>
         <line x1="-4.4" y1="63" x2="4.4" y2="65"/><line x1="-4.4" y1="71" x2="4.4" y2="73"/>
         <line x1="-4.4" y1="79" x2="4.4" y2="81"/><line x1="-4.4" y1="87" x2="4.4" y2="89"/>
       </g>
-      <!-- scent-stopper pommel -->
       <path d="M0,92 C7,95 9.5,101 8.5,109 C7.5,117 4,123 0,126 C-4,123 -7.5,117 -8.5,109 C-9.5,101 -7,95 0,92 Z"
             fill="url(#fitR)" stroke="#59637a" stroke-width="1"/>
       <circle cx="0" cy="128.5" r="2.2" fill="url(#fitR)"/>
@@ -447,21 +567,18 @@ footer .monogram{display:block;margin-bottom:10px}
       <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">GitHub Pages</span></div>
       <div class="card-links">
         <a class="btn btn-sm btn-solid" href="https://dtrkg.com" target="_blank" rel="noopener">Visit Site</a>
-        <!-- TODO: paste the repo URL below -->
         <a class="btn btn-sm" href="https://github.com/maxammo117/DT-Website" target="_blank" rel="noopener">Code</a>
       </div>
     </article>
-    
+
     <article class="card reveal d1">
       <h3>The Reference Room</h3>
       <span class="status">Demo build</span>
       <p>A luxury watch marketplace with a working cart, hand-drawn SVG watches whose hands sweep to the real time, brand filtering, and a slide-out cart with quantity control. Built around the reference numbers I collect by.</p>
       <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
       <div class="card-links">
-        <!-- Relative link: works when both files sit in the same GitHub Pages repo -->
-        <a class="btn btn-sm btn-solid" href="https://maxammo117.github.io/The-Reference-Room/">Live Demo</a>
-        <!-- TODO: paste the repo URL below -->
-        <a class="btn btn-sm" href="https://github.com/maxammo117/The-Reference-Room/blob/main/index.html" target="_blank" rel="noopener">Code</a>
+        <a class="btn btn-sm btn-solid" href="https://maxammo117.github.io/The-Reference-Room/" target="_blank" rel="noopener">Live Demo</a>
+        <a class="btn btn-sm" href="https://github.com/maxammo117/The-Reference-Room" target="_blank" rel="noopener">Code</a>
       </div>
     </article>
 
@@ -471,7 +588,6 @@ footer .monogram{display:block;margin-bottom:10px}
       <p>AI ticket-to-invoice tool for small dump fleets: photograph a paper scale ticket, review the extracted data, and send a clean invoice the same day. Born from real paperwork at a real fleet.</p>
       <div class="tags"><span class="tag">React</span><span class="tag">Python</span><span class="tag">Product</span></div>
       <div class="card-links">
-        <!-- TODO: paste the repo URL when it's public -->
         <a class="btn btn-sm" href="https://github.com/maxammo117" target="_blank" rel="noopener">Follow the Build</a>
       </div>
     </article>
@@ -483,8 +599,8 @@ footer .monogram{display:block;margin-bottom:10px}
   <p class="sec-kicker reveal">The Tale</p>
   <h2 class="reveal">Diesel, Dirt &amp; Code</h2>
   <div class="about-grid reveal d1">
-    <p>I turn wrenches and run operations at my family's trucking company in the Southern Tier of New York, heavy haul, dump trailers, real deadlines. That's where I learned how small businesses actually work: <em>the phone rings, the job gets done, the invoice goes out.</em></p>
-    <p>Now I build websites the same way, by hand, in plain HTML, CSS, and JavaScript, for local businesses that are great at their trade and invisible online. Business degree, equipment-operator's patience, and a builder's stubbornness.</p>
+    <p>I turn wrenches and run operations at my family's trucking company in the Southern Tier of New York — heavy haul, dump trailers, real deadlines. That's where I learned how small businesses actually work: <em>the phone rings, the job gets done, the invoice goes out.</em></p>
+    <p>Now I build websites the same way by hand, in plain HTML, CSS, and JavaScript — for local businesses that are great at their trade and invisible online. Business degree, equipment-operator's patience, and a builder's stubbornness.</p>
     <p>If your outfit doesn't show up on Google, that's the problem I fix.</p>
   </div>
 </section>
@@ -493,54 +609,202 @@ footer .monogram{display:block;margin-bottom:10px}
 <section id="contact" class="contact">
   <p class="sec-kicker reveal">Send Word</p>
   <h2 class="reveal">Summon a Developer</h2>
-  <p class="contact-note reveal">The eagles are busy — email is faster.</p>
+  <p class="contact-note reveal">The eagles are busy — a message is faster.</p>
   <div class="contact-cta reveal d1">
-    <a class="btn btn-solid" id="emailBtn" href="#">Email Me</a>
+    <button class="btn btn-solid" id="emailBtn" type="button" data-modal-open>Send Word</button>
     <button class="btn" id="copyBtn" type="button">Copy Email</button>
     <a class="btn" href="https://github.com/maxammo117" target="_blank" rel="noopener">GitHub</a>
   </div>
 </section>
+
 <section class="portrait-block">
-  <img src="deyton.png"
-       alt="Deyton Dickson"
-       class="portrait"
-       width="200" height="200">
+  <img src="deyton.png" alt="Deyton Dickson" class="portrait" width="400" height="400">
   <p class="portrait-caption">Deyton Dickson · Southern Tier, NY</p>
 </section>
-
 
 <footer class="site-footer">
   <span class="monogram">D · D</span>
   <p>Forged in New York · &copy; <span id="year"></span> Deyton Dickson</p>
 </footer>
 
+<!-- ================= MODAL ================= -->
+<div class="modal-backdrop" id="modalBackdrop"></div>
+
+<div class="modal" id="loreModal" role="dialog" aria-modal="true"
+     aria-labelledby="loreTitle" aria-hidden="true">
+
+  <button class="modal__exit" id="modalExit" type="button" aria-label="Close">
+    <i class="fa-solid fa-times" aria-hidden="true"></i>
+  </button>
+
+  <div class="modal__half modal__about">
+    <h3 class="modal__title" id="loreTitle">The Lore</h3>
+    <h4 class="modal__sub-title">Frontend Developer</h4>
+    <p class="modal__para">
+      I write software for an industry I work inside. Days are dispatch and diesel at a
+      heavy-haul fleet in upstate New York; the rest is building the tools that job kept
+      needing a Python billing system and hand-coded web work.
+      <b class="gold">I learned by solving problems I couldn't hand to anyone else.</b>
+      Ready for bigger ones.
+    </p>
+
+    <div class="modal__languages">
+      <figure class="modal__language">
+        <img class="modal__language--img" src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JavaScript" width="42" height="42">
+        <span class="language__name">JavaScript</span>
+      </figure>
+      <figure class="modal__language">
+        <img class="modal__language--img" src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React" width="42" height="42">
+        <span class="language__name">React</span>
+      </figure>
+      <figure class="modal__language">
+        <img class="modal__language--img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Devicon-html5-plain.svg/250px-Devicon-html5-plain.svg.png" alt="HTML5" width="42" height="42">
+        <span class="language__name">HTML</span>
+      </figure>
+      <figure class="modal__language">
+        <img class="modal__language--img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/CSS3_logo.svg/1280px-CSS3_logo.svg.png" alt="CSS3" width="42" height="42">
+        <span class="language__name">CSS</span>
+      </figure>
+    </div>
+  </div>
+
+  <div class="modal__half modal__contact">
+    <h3 class="modal__title">Reach Out</h3>
+    <h4 class="modal__sub-title">I'm open to exploring new opportunities.</h4>
+
+    <form id="contactForm" novalidate>
+      <div class="form__item">
+        <label for="fName">Name</label>
+        <input id="fName" type="text" name="user_name" required>
+      </div>
+      <div class="form__item">
+        <label for="fEmail">Email</label>
+        <input id="fEmail" type="email" name="user_email" required>
+      </div>
+      <div class="form__item">
+        <label for="fMessage">Message</label>
+        <textarea id="fMessage" name="message" required></textarea>
+      </div>
+      <div class="form__item">
+        <button class="btn btn-solid eagle-btn" id="eagleBtn" type="submit">
+          <span class="eagle-btn__label">Send Word</span>
+          <svg class="eagle-btn__bird" viewBox="0 0 100 60" aria-hidden="true">
+            <g class="eagle__wing eagle__wing--l">
+              <path d="M50,30 C40,20 26,12 4,10 C16,20 26,28 34,32 C40,34 46,34 50,34 Z"/>
+            </g>
+            <g class="eagle__wing eagle__wing--r">
+              <path d="M50,30 C60,20 74,12 96,10 C84,20 74,28 66,32 C60,34 54,34 50,34 Z"/>
+            </g>
+            <path d="M50,22 C53,22 55,25 55,30 L54,44 L50,52 L46,44 L45,30 C45,25 47,22 50,22 Z"/>
+            <path d="M50,17 L54,24 L46,24 Z"/>
+          </svg>
+        </button>
+      </div>
+    </form>
+
+    <div class="modal__overlay modal__overlay--load" id="loadOverlay">
+      <i class="fa-solid fa-spinner" aria-hidden="true"></i>
+    </div>
+    <div class="modal__overlay modal__overlay--success" id="successOverlay">
+      <p>Message received.</p>
+      <p>I'll be in touch shortly.</p>
+    </div>
+  </div>
+</div>
+
 <script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+document.getElementById('year').textContent = new Date().getFullYear();
 
+/* ===== ONE LINE TO EDIT ===== */
+const EMAIL = "Deyton.dickson@icloud.com";
 
-<script>
-/* =====================================================
-   ONE LINE TO EDIT: your real email address goes here.
-   Both email buttons read from this constant.
-   ===================================================== */
-const EMAIL = "Deytondickson1@gmail.com"; // TODO ← change me
-
-/* ---- email buttons ---- */
-const emailBtn = document.getElementById("emailBtn");
-const heroEmail = document.getElementById("heroEmail");
-emailBtn.href = "mailto:" + EMAIL + "?subject=Website%20inquiry";
-heroEmail.href = "mailto:" + EMAIL + "?subject=Website%20inquiry";
-
+/* ---- copy email ---- */
 const copyBtn = document.getElementById("copyBtn");
 copyBtn.addEventListener("click", async () => {
   try {
     await navigator.clipboard.writeText(EMAIL);
     copyBtn.textContent = "Copied ✓";
   } catch {
-    copyBtn.textContent = EMAIL; // fallback: show it so it can be copied by hand
+    copyBtn.textContent = EMAIL;
   }
   setTimeout(() => (copyBtn.textContent = "Copy Email"), 1800);
+});
+
+/* ---- modal ---- */
+const modal          = document.getElementById("loreModal");
+const backdrop       = document.getElementById("modalBackdrop");
+const modalExit      = document.getElementById("modalExit");
+const loadOverlay    = document.getElementById("loadOverlay");
+const successOverlay = document.getElementById("successOverlay");
+const contactForm    = document.getElementById("contactForm");
+const eagleBtn       = document.getElementById("eagleBtn");
+let lastFocused = null;
+
+function openModal() {
+  lastFocused = document.activeElement;
+  modal.classList.add("is-open");
+  backdrop.classList.add("is-open");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("is-locked");
+  setTimeout(() => modalExit.focus(), 250);
+}
+
+function closeModal() {
+  modal.classList.remove("is-open");
+  backdrop.classList.remove("is-open");
+  modal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("is-locked");
+  loadOverlay.classList.remove("is-active");
+  successOverlay.classList.remove("is-active");
+  if (lastFocused) lastFocused.focus();
+}
+
+document.querySelectorAll("[data-modal-open]").forEach((btn) =>
+  btn.addEventListener("click", openModal)
+);
+modalExit.addEventListener("click", closeModal);
+backdrop.addEventListener("click", closeModal);
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
+});
+
+/* ---- form ---- */
+contactForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  if (!contactForm.checkValidity()) { contactForm.reportValidity(); return; }
+
+  eagleBtn.classList.add("is-flying");
+  loadOverlay.classList.add("is-active");
+
+  const payload = Object.fromEntries(new FormData(contactForm));
+  payload._subject = "Portfolio message from " + payload.user_name;
+  payload._captcha = "false";
+
+  let ok = true;
+  try {
+    const res = await fetch("https://formsubmit.co/ajax/" + EMAIL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) ok = false;
+  } catch {
+    ok = false;
+  }
+
+  eagleBtn.classList.remove("is-flying");
+  loadOverlay.classList.remove("is-active");
+
+  if (ok) {
+    successOverlay.innerHTML =
+      "<p>Message received.</p><p>I'll be in touch shortly.</p>";
+    contactForm.reset();
+  } else {
+    successOverlay.innerHTML =
+      "<p>That didn't send.</p><p>Reach me directly at " +
+      '<a href="mailto:' + EMAIL + '">' + EMAIL + "</a></p>";
+  }
+  successOverlay.classList.add("is-active");
 });
 
 /* ---- the Eye of Sauron: pupil tracks the pointer ---- */
@@ -549,10 +813,8 @@ const pupil = document.getElementById("pupil");
 const iris = document.getElementById("iris");
 const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-const MAX_X = 56, MAX_Y = 24;      // how far the pupil may travel
-let tx = 0, ty = 0;                // target offset
-let px = 0, py = 0;                // current offset (eased)
-let lastInput = 0;
+const MAX_X = 56, MAX_Y = 24;
+let tx = 0, ty = 0, px = 0, py = 0, lastInput = 0;
 
 window.addEventListener("pointermove", (e) => {
   const r = eye.getBoundingClientRect();
@@ -561,14 +823,13 @@ window.addEventListener("pointermove", (e) => {
   const dx = e.clientX - cx;
   const dy = e.clientY - cy;
   const dist = Math.hypot(dx, dy) || 1;
-  const reach = Math.min(1, dist / 260); // nearer cursor = subtler gaze
+  const reach = Math.min(1, dist / 260);
   tx = (dx / dist) * MAX_X * reach;
   ty = (dy / dist) * MAX_Y * reach;
   lastInput = performance.now();
 }, { passive: true });
 
 function animate(t) {
-  // no pointer lately? the Eye wanders, searching.
   if (!reduced && t - lastInput > 2600) {
     tx = Math.sin(t / 1500) * MAX_X * 0.7;
     ty = Math.sin(t / 2400) * MAX_Y * 0.45;
@@ -583,12 +844,10 @@ function animate(t) {
 }
 requestAnimationFrame(animate);
 
-/* ---- scroll reveals: fade in on entry, fade out on exit ---- */
+/* ---- scroll reveals ---- */
 const io = new IntersectionObserver(
   (entries) =>
-    entries.forEach((en) =>
-      en.target.classList.toggle("visible", en.isIntersecting)
-    ),
+    entries.forEach((en) => en.target.classList.toggle("visible", en.isIntersecting)),
   { threshold: 0.16 }
 );
 document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
